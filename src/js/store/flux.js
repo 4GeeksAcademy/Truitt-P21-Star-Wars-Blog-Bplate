@@ -1,47 +1,91 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	/*
-	//People
-	{
-		name: anakin
-		age: 22
-	}
-	//Planets
-	{
+
+	return {
+
+		store: {
+			characters: [],
+			planets: [],
+			vehicles: [],
+			favorites: [],
+		},
+
+		actions: {
+			loadPeople: async () => {
+				try {
+					const response = await fetch('https://swapi.dev/api/people');
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					const data = await response.json();
+					setStore({ characters: data.results });
+					console.log(data.results)
+				} catch (error) {
+					console.error('There was a problem with the fetch operation', error);
+				}
+			},
+
+			loadPlanets: async () => {
+				try {
+					const response = await fetch('https://swapi.dev/api/planets');
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					const data = await response.json();
+					setStore({ planets: data.results });
+					console.log(data.results)
+				} catch (error) {
+					console.error('There was a problem with the fetch operation', error);
+				}
+			},
+
+			loadVehicles: async () => {
+				try {
+					const response = await fetch('https://swapi.dev/api/vehicles');
+					if (!response.ok) {
+						throw new Error('Network response was not ok');
+					}
+					const data = await response.json();
+					setStore({ vehicles: data.results });
+					console.log(data.results)
+				} catch (error) {
+					console.error('There was a problem with the fetch operation', error);
+				}
+			},
+
+		}
+
+		// return {
+		// 	store: {
+		// 		characters: [
+		// 			{
+		// 				properties: {
+		// 					name: 'Ernesto',
+		// 					height: '2m'
+		// 				},
+		// 				description: 'This character is cool'
+		// 			}
+		// 		],
+		// 		planets: [
+		// 			{
+		// 				properties: {
+		// 					name: 'tatooine',
+		// 					diameter: '2000000000000m'
+		// 				},
+		// 				description: 'This planet is cool'
+		// 			}
+		// 		],
+		// 		vehicles: [],
+		// 	},
+		// 	actions: {
+		// 		loadStarWars: () => {
+		// 			console.log("fetch data and update store here!")
+		// 		}
+		// 	}
+		// };
+		// };
 
 	}
-	//Vehicles
-	{
-		model: 
-	}
-	*/
-	return {
-		store: {
-			characters: [
-				{
-					properties: {
-						name: 'Ernesto',
-						height: '2m'
-					},
-					description: 'This character is cool'
-				}
-			],
-			planets: [
-				{
-					properties: {
-						name: 'tatooine',
-						diameter: '2000000000000m'
-					},
-					description: 'This planet is cool'
-				}
-			],
-			vehicles: [],
-		},
-		actions: {
-			loadStarWars: () => {
-				console.log("fetch data and update store here!")
-			}
-		}
-	};
-};
+
+}
 
 export default getState;

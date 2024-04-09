@@ -20,6 +20,21 @@ export const Navbar = () => {
         </li>
       </ul>
     </div>
+
+{/* Favorites Button */}
+<div class="btn-group" style={{ marginRight: '75px' }}>
+  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Favorites
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <li><hr class="dropdown-divider"/></li>
+    <li><a class="dropdown-item" href="#">Separated link</a></li>
+  </ul>
+</div>
+
   </div>
 </nav>
 	);
