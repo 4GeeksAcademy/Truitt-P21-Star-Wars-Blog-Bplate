@@ -166,7 +166,7 @@ const HomeGrid = () => {
                 <h1 style={{ color: 'red' }}>Characters</h1>
                 <div className="d-flex flex-row scrollable-row">
                     {
-                        store.people.map((character, index) =>
+                        store.characters.map((character, index) =>
                             <Card
                                 key={index} character={character} index={index} type="character"
                             />
