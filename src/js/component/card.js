@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 import { useNavigate } from "react";
 
 const Card = (props) => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate();
     const { store, actions } = useContext(Context);
 
     let field
