@@ -52,38 +52,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			addFavorite: (name) => {
+				const favorites = getStore().favorites
+				favorites.push(name)
+				setStore({ favorites: favorites })
+			},
+
+			deleteFavorite: (idx) => {
+				const favorites = getStore().favorites
+				newFavorites = favorites.filter((item, index) => {
+					return (
+						index !== idx
+					)
+				})
+				setStore({ favorites: newFavorites })
+			}
+
 		}
-
-		// return {
-		// 	store: {
-		// 		characters: [
-		// 			{
-		// 				properties: {
-		// 					name: 'Ernesto',
-		// 					height: '2m'
-		// 				},
-		// 				description: 'This character is cool'
-		// 			}
-		// 		],
-		// 		planets: [
-		// 			{
-		// 				properties: {
-		// 					name: 'tatooine',
-		// 					diameter: '2000000000000m'
-		// 				},
-		// 				description: 'This planet is cool'
-		// 			}
-		// 		],
-		// 		vehicles: [],
-		// 	},
-		// 	actions: {
-		// 		loadStarWars: () => {
-		// 			console.log("fetch data and update store here!")
-		// 		}
-		// 	}
-		// };
-		// };
-
 	}
 
 }

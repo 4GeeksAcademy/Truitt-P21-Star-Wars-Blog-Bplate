@@ -1,41 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext"
 
 export const Navbar = () => {
-	return (		
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-  	<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/2560px-Star_Wars_Logo.svg.png" alt="" width="100" height="60" />
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+  const { store, actions } = useContext(Context);
+  const imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/2560px-Star_Wars_Logo.svg.png";
+  const url = "/";
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container-fluid">
+        <Link to={url}>
+          <img src={imageUrl} alt="Star Wars Logo" width="100" height="60" />
+        </Link>
+
+        {/* Favorites Button */}
+        <div className="btn-group" style={{ marginRight: '75px' }}>
+          <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Favorites
+          </button>
+          <ul className="dropdown-menu">
+            {store.favorites.map((item, index) => {
+              return (
+                <li key={index}>
+                  <span className="dropdown-item">{item + " "}
+                    <button onClick={() => actions.deleteFavorite(index)}>
+                      Delete
+                    </button>
+                  </span>
+                </li>
+              )
+            })}
           </ul>
-        </li>
-      </ul>
-    </div>
+        </div>
 
-{/* Favorites Button */}
-<div class="btn-group" style={{ marginRight: '75px' }}>
-  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    Favorites
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-    <li><hr class="dropdown-divider"/></li>
-    <li><a class="dropdown-item" href="#">Separated link</a></li>
-  </ul>
-</div>
-
-  </div>
-</nav>
-	);
+      </div>
+    </nav>
+  );
 };
+
+export default Navbar;

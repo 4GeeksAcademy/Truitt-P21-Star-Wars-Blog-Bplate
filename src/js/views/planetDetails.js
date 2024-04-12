@@ -1,86 +1,49 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { useParams } from "react-router";
+import { Context } from "../store/appContext";
 
-const planets = [
+const PlanetDetails = () => {
 
-  {
-    id: 2 - 1,
-    imageSrc: "https://oyster.ignimgs.com/mediawiki/apis.ign.com/star-wars-episode-7/4/4b/Tatooine-3.jpg",
-    name: "Tatooine",
-    bio: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    info: "Population: 200,000 - Terrain: Desert - Diameter: 10,465",
-  },
+  const { store, actions } = useContext(Context)
+  let { id } = useParams();
+  const planet = store.planets.find((planet, index) => index === parseInt(id))
 
-  {
-    id: 2 - 2,
-    imageSrc: "https://static.wikia.nocookie.net/starwars/images/d/d4/Yavin-4-SWCT.png/revision/latest?cb=20181015023938",
-    name: "Yavin IV",
-    bio: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    info: "Population: 1,000 - Terrain: Jungle, Rainforests - Diameter: 10,200km",
-  },
-
-  {
-    id: 2 - 3,
-    imageSrc: "https://lumiere-a.akamaihd.net/v1/images/alderaan-main_f5b676cf.jpeg?region=0%2C0%2C1280%2C720",
-    name: "Alderaan",
-    bio: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    info: "Population: 2,000,000,000 - Terrain: Grasslands, Mountains - Diameter: 12,500km",
-  },
-
-  {
-    id: 2 - 4,
-    imageSrc: "https://lumiere-a.akamaihd.net/v1/images/image_51705c58.jpeg",
-    name: "Coruscant",
-    bio: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    info: "Population: 1,000,000,000,000 - Terrain: Cityscape, Mountains - Diameter: 12,240km",
-  },
-
-  {
-    id: 2 - 5,
-    imageSrc: "https://static.wikia.nocookie.net/starwars/images/a/a9/Eaw_Kamino.jpg/revision/latest?cb=20090527045541",
-    name: "Kamino",
-    bio: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-    info: "Population: 1,000,000,000 - Terrain: Ocean - Diameter: 19,720km",
-  },
-
-]
-
-const HorizontalCard = (props) => {
   return (
     <div>
-
-      <div className="card mb-3" style="max-width: 540px;">
+      Character Details
+      <div className="card mb-3" style={{ maxWidth: "600px" }}>
         <div className="row g-0">
           <div className="col-md-4">
-            <img src="{props.imageSrc}" className="img-fluid rounded-start" alt="..." />
+            <img src={`https://starwars-visualguide.com/assets/img/planets/${parseInt(id) + 1}.jpg`}
+              onError={(e) => {
+                e.target.src = 'https://starwars-visualguide.com/assets/img/placeholder.jpg'
+              }} className="img-fluid rounded-start" alt="..." />
           </div>
           <div className="col-md-8">
             <div className="card-body">
-              <h5 className="card-title">{props.name}</h5>
-              <p className="card-text">{props.bio}</p>
-              <p className="card-text"><small className="text-body-secondary">{props.info}</small></p>
+              <h5 className="card-title">{planet.name}</h5>
+              <p className="card-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+                molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+                numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+                optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+                obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam
+                nihil, eveniet aliquid culpa officia aut!</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
 
-const PlanetDetails = () => {
-  return (
-    <div>
-      Planet Details
-      {/* {
-        planets.map((planets) => (
-          <HorizontalCard
-            id={planets.id}
-            imageSrc={planets.imageSrc}
-            name={planets.name}
-            bio={planets.bio}
-            info={planets.info}
-          />
-        ))
-      } */}
+      <ul class="list-group">
+        <li class="list-group-item" style={{ color: 'red' }}>Population: {planet.population}</li>
+        <li class="list-group-item" style={{ color: 'red' }}>Terrain: {planet.terrain}</li>
+        <li class="list-group-item" style={{ color: 'red' }}>Diameter(km): {planet.diameter}</li>
+        <li class="list-group-item" style={{ color: 'red' }}>Rotation Period(hr): {planet.rotation_period}</li>
+        <li class="list-group-item" style={{ color: 'red' }}>Orbital Period(hr): {planet.orbital_period}</li>
+        <li class="list-group-item" style={{ color: 'red' }}>Climate: {planet.climate}</li>
+        <li class="list-group-item" style={{ color: 'red' }}>Gravity: {planet.gravity}</li>
+      </ul>
+
     </div>
   );
 };
